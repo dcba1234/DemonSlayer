@@ -26,9 +26,8 @@ public class CharacterController2D : MonoBehaviour
     [System.Serializable]
     public class BoolEvent : UnityEvent<bool> { }
     public BoolEvent OnCrouchEvent;
-
     private void Awake()
-    {
+    {   
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
         if (OnLandEvent == null)
@@ -56,8 +55,6 @@ public class CharacterController2D : MonoBehaviour
             }
         }
     }
-
-
     public void Move(float move, bool crouch, bool jump)
     {
         // If crouching, check to see if the character can stand up
