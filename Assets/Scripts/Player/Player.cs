@@ -52,7 +52,8 @@ public class Player : MonoBehaviour
     }
     public void onIddle()
     {
-        
+
+        if (controller.GetVelocity() == 0)
         anim.SetBool("isWalking", false);
     }
 }
