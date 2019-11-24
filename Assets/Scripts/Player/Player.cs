@@ -20,12 +20,26 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
+    private void FixedUpdate()
+    {
+        if (controller.GetGrounded() == true)
+        {
 
+            anim.SetBool("isJumping", false);
+        }
+        else
+        {
+            anim.SetBool("isJumping", true);
+        }
+    }
     public void jump()
     {
-        
+        Jump = true;
+        anim.SetBool("isJumping", true);
+        controller.Move(controller.GetVelocity(), false, Jump);
+        Jump = false;
     }
 
     public void btn_leftOnClick()
@@ -55,5 +69,11 @@ public class Player : MonoBehaviour
 
         if (controller.GetVelocity() == 0)
         anim.SetBool("isWalking", false);
+    }
+    public void Attack()
+    {
+
+        anim.SetTrigger("Attack");
+
     }
 }
