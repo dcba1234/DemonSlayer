@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
         if (this.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) return;
         Jump = true;
         anim.SetBool("isJumping", true);
-        Debug.Log(controller.GetVelocity());
         controller.Move(horizontalMove, false, Jump);
         Jump = false;
     }
