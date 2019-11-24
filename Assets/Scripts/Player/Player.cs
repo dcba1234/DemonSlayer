@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     {
         
     }
+
     private void FixedUpdate()
     {
         if (controller.GetGrounded() == true)
@@ -36,9 +38,11 @@ public class Player : MonoBehaviour
     }
     public void jump()
     {
+        if (this.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) return;
         Jump = true;
         anim.SetBool("isJumping", true);
-        controller.Move(controller.GetVelocity(), false, Jump);
+        Debug.Log(controller.GetVelocity());
+        controller.Move(horizontalMove, false, Jump);
         Jump = false;
     }
 
@@ -68,12 +72,23 @@ public class Player : MonoBehaviour
     {
 
         if (controller.GetVelocity() == 0)
-        anim.SetBool("isWalking", false);
+        {
+            anim.SetBool("isWalking", false);
+            horizontalMove = 0;
+        }
+        
+        
     }
     public void Attack()
     {
 
         anim.SetTrigger("Attack");
 
+    }
+
+    public void Damage(float damage)
+    {
+        // sau này mỗi thứ sẽ mất 1 kiểu máu khác nên gọi hàm này để nhân vật tụt máu
+        Heart.heart -= 10f;
     }
 }
