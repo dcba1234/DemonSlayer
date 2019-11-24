@@ -21,9 +21,7 @@ public class Trap : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-
             player.Damage(10);
-            Debug.Log(Heart.heart);
         }
     }
 }
