@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Enemy_move : MonoBehaviour
 {
     // Start is called before the first frame update
     public CharacterController2D controller;
     [SerializeField] public int test;
     float horizontalMove = 0f;
-    public float runSpeed ;
+    public float runSpeed;
     private Animator anim;
     bool Jump = false;
     bool isAtk = false;
+    private float distance = 0;
+    [Range(100,500)]public int movingRange = 100;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -21,29 +22,32 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //sxsxx x
+        
+        if(distance > runSpeed * movingRange)
+        {
+            btn_rightOnClick();
+            distance += runSpeed;
+            if (distance > runSpeed * movingRange * 2)
+            {
+                {
+                    distance = 0;
+                    
+                }
+            }
+        }
+        else
+        {
+            btn_leftOnClick();
+            distance += runSpeed;
+        }
+        
     }
 
     private void FixedUpdate()
     {
-        if (controller.GetGrounded() == true)
-        {
+        
+    }
 
-            anim.SetBool("isJumping", false);
-        }
-        else
-        {
-            anim.SetBool("isJumping", true);
-        }
-    }
-    public void jump()
-    {
-        if (this.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) return;
-        Jump = true;
-        anim.SetBool("isJumping", true);
-        controller.Move(horizontalMove, false, Jump);
-        Jump = false;
-    }
 
     public void btn_leftOnClick()
     {
@@ -54,12 +58,12 @@ public class Player : MonoBehaviour
             anim.SetBool("isWalking", true);
         else anim.SetBool("isWalking", false);
         controller.Move(horizontalMove, false, Jump);
-        
+
     }
 
     public void btn_rightOnClick()
     {
-        
+
         if (this.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) return;
         horizontalMove = runSpeed;
         if (Jump != true)
@@ -75,8 +79,8 @@ public class Player : MonoBehaviour
             anim.SetBool("isWalking", false);
             horizontalMove = 0;
         }
-        
-        
+
+
     }
     public void Attack()
     {
