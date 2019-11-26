@@ -7,6 +7,10 @@ TagManager:
   - ground
   - enemy
   - Trap
+  - CheckAttack
+  - Bar
+  - HB
+  - Skill1
   layers:
   - Default
   - TransparentFX
@@ -49,6 +53,9 @@ TagManager:
     locked: 0
   - name: Background3
     uniqueID: 2676883643
+    locked: 0
+  - name: Skill1
+    uniqueID: 3833152563
     locked: 0
   - name: Ground
     uniqueID: 2018746269

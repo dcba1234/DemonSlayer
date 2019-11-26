@@ -8,14 +8,20 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     public CharacterController2D controller;
     [SerializeField] public int test;
-    float horizontalMove = 0f;
+    public float horizontalMove = 0f;
     public float runSpeed ;
     private Animator anim;
     bool Jump = false;
-    bool isAtk = false;
+    public bool isAtk = false;
+
+    public bool skill1;
+
+    public bool LeftNotRight = false;
+    //public EdgeCollider2D edgeCol2;
     void Start()
     {
         anim = GetComponent<Animator>();
+                 
     }
 
     // Update is called once per frame
@@ -26,6 +32,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         if (controller.GetGrounded() == true)
         {
 
@@ -43,6 +50,7 @@ public class Player : MonoBehaviour
         anim.SetBool("isJumping", true);
         controller.Move(horizontalMove, false, Jump);
         Jump = false;
+        
     }
 
     public void btn_leftOnClick()
@@ -54,6 +62,7 @@ public class Player : MonoBehaviour
             anim.SetBool("isWalking", true);
         else anim.SetBool("isWalking", false);
         controller.Move(horizontalMove, false, Jump);
+        LeftNotRight=true;
         
     }
 
@@ -66,6 +75,13 @@ public class Player : MonoBehaviour
             anim.SetBool("isWalking", true);
         else anim.SetBool("isWalking", false);
         controller.Move(horizontalMove, false, Jump);
+        LeftNotRight = false;
+    }
+
+    public void btn_Skill1()
+    {
+        anim.SetTrigger("CastSkill1");
+        skill1=true;
     }
     public void onIddle()
     {
@@ -80,9 +96,9 @@ public class Player : MonoBehaviour
     }
     public void Attack()
     {
-
         anim.SetTrigger("Attack");
-
+        isAtk=true;
+        
     }
 
     public void Damage(float damage)
