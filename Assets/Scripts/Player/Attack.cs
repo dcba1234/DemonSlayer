@@ -10,7 +10,12 @@ public class Attack : MonoBehaviour
 
     public Player player;
 
-    public bool Hit; 
+    public bool Hit;
+
+    
+    public float dame = 500;
+
+    //public Enemy_move enemy_move;
     void Start()
     {
         edgeCol = GetComponent<EdgeCollider2D>();
@@ -66,11 +71,5 @@ public class Attack : MonoBehaviour
             
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("enemy"))
-        {
-            Hit=true;
-        }
-    }
+    
 }

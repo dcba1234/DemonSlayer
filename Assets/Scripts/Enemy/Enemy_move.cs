@@ -20,23 +20,39 @@ public class Enemy_move : MonoBehaviour
 
     public HealthBar healthBar;
 
-    public Bleed bleed;
+    public float MonsterHealth = 1000;
+
+    public Attack attack;
+
+    
+
+    public float blood;
+
+    public bool Hit;
+
+    public bool MoveLeft;
+
+    //public Bleed bleed;
     void Start()
     {
         anim = GetComponent<Animator>();
-        healthBar = GameObject.FindGameObjectWithTag("HB").GetComponent<HealthBar>();
+        blood = 1;
+        Hit = false;
         //Debug.Log(healthBar.transform.position);
-        bleed = GameObject.FindGameObjectWithTag("Bar").GetComponent<Bleed>();
+        attack = GameObject.FindGameObjectWithTag("CheckAttack").GetComponent<Attack>();;
+        //healthBar = GameObject.FindGameObjectWithTag("HB").GetComponent<HealthBar>();
+        //Debug.Log(this.ToString());
+    
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(bleed.die==false)
+       if(blood>0)
        {
         if(distance > runSpeed * movingRange)
         {
-            
+            MoveLeft = false;
             btn_rightOnClick();
             
             distance += runSpeed;
@@ -51,23 +67,25 @@ public class Enemy_move : MonoBehaviour
         }
         else
         {
-            
+            MoveLeft=true;
             btn_leftOnClick();
             distance += runSpeed;
         }
-       
-        if(horizontalMove>horizontalMove1 || horizontalMove<horizontalMove1)
-        {
-            horizontalMove1=horizontalMove;
-            
-            healthBar.FlipHB();
-        }
        }
-        else
-        {
-            anim.SetBool("isDie",true);
+       else
+       {
+           anim.SetTrigger("isDie");
+           Destroy(gameObject);
+       }
+       
+        
+        
+        
+        //else
+       // {
+       //     anim.SetBool("isDie",true);
 
-        }
+       // }
         
     }
 
@@ -121,5 +139,37 @@ public class Enemy_move : MonoBehaviour
     {
         // sau này mỗi thứ sẽ mất 1 kiểu máu khác nên gọi hàm này để nhân vật tụt máu
         Heart.heart -= 10f;
+    }
+    public List<GameObject> myList;
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("CheckAttack"))
+        {
+            Debug.Log("Hit");
+            //Debug.Log(other.GetInstanceID());
+            Hit=true;
+            
+            float x = attack.dame/MonsterHealth;
+            Debug.Log(attack.dame);
+            blood = blood-x;
+            if(blood > 0)
+            {
+                
+            }
+            else
+            {
+                blood = 0;
+                anim.SetTrigger("isDie");
+            }
+            
+            //bleed.BleedH(blood);
+            //myList.AddRange(GameObject.FindGameObjectsWithTag("enemy"));
+            //    Debug.Log(myList[1]);
+            //    foreach(GameObject item in myList){
+            //        Debug.Log(item);
+
+            //    }
+        }
     }
 }

@@ -6,37 +6,43 @@ public class Bleed : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public Attack attack;
+    //public Attack attack;
 
-    public bool die;
+    //public bool die;
 
-    public float dame = 100;
+    public Enemy_move enemy_Move;
+    public GameObject player;
 
-    public float MonsterHealth = 1000;
     void Start()
     {
-        attack = GameObject.FindGameObjectWithTag("CheckAttack").GetComponent<Attack>();
         
+        
+
+        //Debug.Log(obj.name);
+        player = transform.parent.parent.gameObject;
+        enemy_Move = player.GetComponent<Enemy_move>();
+        
+        //Debug.Log(player.transform.root);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(attack.Hit==true)
-        {
-            float health = dame/MonsterHealth;
-            Debug.Log(health);
-            float x = transform.localScale[0];
-            if(x>0)
-            {
-            transform.localScale = new Vector3(x-health,1,1);
-            attack.Hit=false;
-            }
-            if(x==0)
-            {
-                die= true;
-            }
-            
-        }
+       
+       if(enemy_Move.Hit == true)
+       {
+        
+        transform.localScale = new Vector3(enemy_Move.blood,1,1);
+        Debug.Log(transform.localScale);
+        enemy_Move.Hit = false;
+       }
+      // else
+       //{
+           
+      // }
+
+       
     }
+    
 }
