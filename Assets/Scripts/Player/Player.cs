@@ -7,16 +7,17 @@ public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     public CharacterController2D controller;
-    [SerializeField] public int test;
+    //[SerializeField] public int test;
     public float horizontalMove = 0f;
     public float runSpeed ;
     private Animator anim;
     bool Jump = false;
-    public bool isAtk = false;
+    //public bool isAtk = false;
 
-    public bool skill1;
+    //public bool skill1;
 
     public bool LeftNotRight = false;
+    public bool DirecCast =false;
     //Attack
     private float timeBtwAttack;
     public float startTimeBtwAttack;
@@ -28,6 +29,19 @@ public class Player : MonoBehaviour
     public GameObject gameObject;
 
     public Enemy_move enemy_Move;
+    //Skill 1
+    public GameObject Skill1;
+
+    public Transform shotPoint;
+    //Skill 2
+    public GameObject Skill2;
+
+    public Transform shotPoint2;
+
+
+    private float timeBtwSkill1;
+
+    public float startTimeBtwSkill1;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -37,7 +51,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //sxsxx x
+        
     }
 
     private void FixedUpdate()
@@ -90,8 +104,36 @@ public class Player : MonoBehaviour
 
     public void btn_Skill1()
     {
+        if(timeBtwSkill1 <=0)
+        {
         anim.SetTrigger("CastSkill1");
-        skill1=true;
+        DirecCast = LeftNotRight;
+        //skill1=true;
+        Instantiate(Skill1,shotPoint.position,transform.rotation);
+        timeBtwSkill1 = startTimeBtwSkill1;
+        }
+        else
+        {
+            timeBtwSkill1 -= Time.deltaTime;
+        }
+
+    }
+    
+    public void btn_Skill2()
+    {
+        if(timeBtwSkill1 <=0)
+        {
+        anim.SetTrigger("Attack");
+        DirecCast = LeftNotRight;
+        //skill1=true;
+        Instantiate(Skill2,shotPoint2.position,transform.rotation);
+        timeBtwSkill1 = startTimeBtwSkill1;
+        }
+        else
+        {
+            timeBtwSkill1 -= Time.deltaTime;
+        }
+
     }
     public void onIddle()
     {
@@ -104,41 +146,32 @@ public class Player : MonoBehaviour
         
         
     }
-    string jdo;
     string tenOb;
+    string tenEnemy;
     public void Attack()
     {
-        tenOb="";
+        tenEnemy="";
         anim.SetTrigger("Attack");
-        isAtk=true;
-        //if(timeBtwAttack <=0 )
-        //{
-        //Debug.Log("1");
+        //isAtk=true;
+        
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemies);
         
         for(int i= 0; i< enemiesToDamage.Length;i++)
         {
             //Debug.Log(i);
-            jdo = enemiesToDamage[0].ToString();
-            for(int y = 0;y<jdo.Length-31;y++)
+            tenOb = enemiesToDamage[0].ToString();
+            for(int y = 0;y<tenOb.Length-31;y++)
             {
-                tenOb = tenOb + jdo[y];
+                tenEnemy = tenEnemy + tenOb[y];
             }
-            Debug.Log(tenOb);
-            //Debug.Log(jdo.Length);
 
-            gameObject = GameObject.Find(tenOb);
+            gameObject = GameObject.Find(tenEnemy);
             enemy_Move = gameObject.GetComponent<Enemy_move>();
             enemy_Move.TakeDamage(damage);
-            //enemiesToDamage[i].GetComponent<Enemy_moves>().TakeDamage(damage);
-            //gameOject = GameObject.FindGameObjectWithTag("CheckAttack").GetComponent<Attack>();;
+            
         }
         timeBtwAttack= startTimeBtwAttack;
-        //}
-       // else
-        //{
-       //     timeBtwAttack -= Time.deltaTime;
-       // }
+        
     }
     void OnDrawGizmosSelected()
     {

@@ -31,6 +31,7 @@ public class Enemy_move : MonoBehaviour
 
     public bool MoveLeft;
 
+    public GameObject bloodEffect;
     //public Bleed bleed;
     void Start()
     {
@@ -46,15 +47,7 @@ public class Enemy_move : MonoBehaviour
     {
        if(blood>0)
        {
-        if(dazedTime <= 0)
-        {
-            runSpeed = 0.1f;
-        }
-        else
-        {
-            runSpeed = 0;
-            dazedTime -= Time.deltaTime;
-        }
+        
         if(distance > runSpeed * movingRange)
         {
             MoveLeft = false;
@@ -82,15 +75,15 @@ public class Enemy_move : MonoBehaviour
            anim.SetTrigger("isDie");
            Destroy(gameObject);
        }
-       
-        
-        
-        
-        //else
-       // {
-       //     anim.SetBool("isDie",true);
-
-       // }
+       if(dazedTime <= 0)
+        {
+            runSpeed = 0.1f;
+        }
+        else
+        {
+            runSpeed = 0;
+            dazedTime -= Time.deltaTime;
+        }
         
     }
 
@@ -149,6 +142,7 @@ public class Enemy_move : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
+        //Instantiate(bloodEffect,transform.position,Quaternion.identity);
         dazedTime = startDazedTime;
         Hit=true;
         blood = blood - damage/MonsterHealth;

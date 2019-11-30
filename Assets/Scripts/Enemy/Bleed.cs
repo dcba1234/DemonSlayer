@@ -37,10 +37,7 @@ public class Bleed : MonoBehaviour
         Debug.Log(transform.localScale);
         enemy_Move.Hit = false;
        }
-      // else
-       //{
-           
-      // }
+     
 
        
     }
