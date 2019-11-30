@@ -17,7 +17,17 @@ public class Player : MonoBehaviour
     public bool skill1;
 
     public bool LeftNotRight = false;
-    //public EdgeCollider2D edgeCol2;
+    //Attack
+    private float timeBtwAttack;
+    public float startTimeBtwAttack;
+    public Transform attackPos;
+    public float attackRange;
+    public LayerMask whatIsEnemies;
+    public float damage;
+
+    public GameObject gameObject;
+
+    public Enemy_move enemy_Move;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -94,11 +104,46 @@ public class Player : MonoBehaviour
         
         
     }
+    string jdo;
+    string tenOb;
     public void Attack()
     {
+        tenOb="";
         anim.SetTrigger("Attack");
         isAtk=true;
+        //if(timeBtwAttack <=0 )
+        //{
+        //Debug.Log("1");
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemies);
         
+        for(int i= 0; i< enemiesToDamage.Length;i++)
+        {
+            //Debug.Log(i);
+            jdo = enemiesToDamage[0].ToString();
+            for(int y = 0;y<jdo.Length-31;y++)
+            {
+                tenOb = tenOb + jdo[y];
+            }
+            Debug.Log(tenOb);
+            //Debug.Log(jdo.Length);
+
+            gameObject = GameObject.Find(tenOb);
+            enemy_Move = gameObject.GetComponent<Enemy_move>();
+            enemy_Move.TakeDamage(damage);
+            //enemiesToDamage[i].GetComponent<Enemy_moves>().TakeDamage(damage);
+            //gameOject = GameObject.FindGameObjectWithTag("CheckAttack").GetComponent<Attack>();;
+        }
+        timeBtwAttack= startTimeBtwAttack;
+        //}
+       // else
+        //{
+       //     timeBtwAttack -= Time.deltaTime;
+       // }
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPos.position,attackRange);    
     }
 
     public void Damage(float damage)
