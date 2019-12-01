@@ -2572,6 +2572,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &466641084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 466641085}
+  m_Layer: 0
+  m_Name: shotPointSkill2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &466641085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466641084}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.0599995, y: 0.42999983, z: 0}
+  m_LocalScale: {x: 1, y: 5.3915, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2030991768027109445}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &517509803
 GameObject:
   m_ObjectHideFlags: 0
@@ -3742,6 +3772,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &696561410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 696561411}
+  m_Layer: 0
+  m_Name: CheckAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &696561411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696561410}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.7599998, y: 0.23999977, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2030991768027109445}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &698465555
 GameObject:
   m_ObjectHideFlags: 0
@@ -8664,6 +8724,36 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!1 &1642327987
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1642327988}
+  m_Layer: 0
+  m_Name: shotPointSkill1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1642327988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642327987}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.1309996, y: -0.08500028, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2030991768027109445}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1643423682
 GameObject:
   m_ObjectHideFlags: 0
@@ -10279,7 +10369,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 5.76
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10303,7 +10393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823447263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.32, y: -3.34, z: -10}
+  m_LocalPosition: {x: 6.63, y: -2.63, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 542375960}
@@ -12393,6 +12483,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8062747865980918398}
+  - {fileID: 696561411}
+  - {fileID: 1642327988}
+  - {fileID: 466641085}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12456,10 +12549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 4585064259258407107}
-  test: 13
   horizontalMove: 0
   runSpeed: 0.5
-  isAtk: 0
   skill1: 0
   pl:
     Level:
@@ -12477,6 +12568,21 @@ MonoBehaviour:
     Coin: 0
     Diamond: 0
   LeftNotRight: 0
+  DirecCast: 0
+  startTimeBtwAttack: 0
+  attackPos: {fileID: 0}
+  attackRange: 0
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 0
+  damage: 0
+  gameObject: {fileID: 0}
+  enemy_Move: {fileID: 0}
+  Skill1: {fileID: 0}
+  shotPoint: {fileID: 0}
+  Skill2: {fileID: 0}
+  shotPoint2: {fileID: 0}
+  startTimeBtwSkill1: 0
 --- !u!114 &4585064259258407107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12544,11 +12650,11 @@ MonoBehaviour:
   movingRange: 150
   healthBar: {fileID: 0}
   MonsterHealth: 1000
-  attack: {fileID: 0}
+  startDazedTime: 0
   blood: 0
   Hit: 0
   MoveLeft: 0
-  myList: []
+  bloodEffect: {fileID: 0}
 --- !u!4 &6062287447995603485
 Transform:
   m_ObjectHideFlags: 0

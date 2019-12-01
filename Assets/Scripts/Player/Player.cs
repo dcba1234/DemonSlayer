@@ -50,8 +50,9 @@ public class Player : MonoBehaviour
         pl = new PlayerEntity(this.transform);
         if (pl.checkSaveState())
         {
-            pl = pl.getState();
-            controller.Blink(new Vector3(pl.CurrentPosition.x, pl.CurrentPosition.y, transform.position.z));
+            //pl = pl.getState();
+            //controller.Blink(new Vector3(pl.CurrentPosition.x, pl.CurrentPosition.y, transform.position.z));
+            // Đoạn code get lại game
         }
     }
 
@@ -182,7 +183,6 @@ public class Player : MonoBehaviour
         }
         timeBtwAttack= startTimeBtwAttack;
         
-        isAtk = true;
 
     }
     void OnDrawGizmosSelected()
