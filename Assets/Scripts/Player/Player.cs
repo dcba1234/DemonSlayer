@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,25 +9,30 @@ public class Player : MonoBehaviour
     public CharacterController2D controller;
     [SerializeField] public int test;
     public float horizontalMove = 0f;
-    public float runSpeed ;
+    public float runSpeed;
     private Animator anim;
     bool Jump = false;
     public bool isAtk = false;
 
     public bool skill1;
-
+    public PlayerEntity pl;
     public bool LeftNotRight = false;
     //public EdgeCollider2D edgeCol2;
     void Start()
     {
         anim = GetComponent<Animator>();
-                 
+        pl = new PlayerEntity(this.transform);
+        if (pl.checkSaveState())
+        {
+            pl = pl.getState();
+            controller.Blink(new Vector3(pl.CurrentPosition.x, pl.CurrentPosition.y, transform.position.z));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //sxsxx x
+        pl.setPosition(transform);
     }
 
     private void FixedUpdate()
@@ -40,6 +45,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            saveAll();
             anim.SetBool("isJumping", true);
         }
     }
@@ -50,7 +56,7 @@ public class Player : MonoBehaviour
         anim.SetBool("isJumping", true);
         controller.Move(horizontalMove, false, Jump);
         Jump = false;
-        
+
     }
 
     public void btn_leftOnClick()
@@ -62,13 +68,13 @@ public class Player : MonoBehaviour
             anim.SetBool("isWalking", true);
         else anim.SetBool("isWalking", false);
         controller.Move(horizontalMove, false, Jump);
-        LeftNotRight=true;
-        
+        LeftNotRight = true;
+
     }
 
     public void btn_rightOnClick()
     {
-        
+
         if (this.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) return;
         horizontalMove = runSpeed;
         if (Jump != true)
@@ -81,7 +87,7 @@ public class Player : MonoBehaviour
     public void btn_Skill1()
     {
         anim.SetTrigger("CastSkill1");
-        skill1=true;
+        skill1 = true;
     }
     public void onIddle()
     {
@@ -91,19 +97,31 @@ public class Player : MonoBehaviour
             anim.SetBool("isWalking", false);
             horizontalMove = 0;
         }
-        
-        
+
+
     }
     public void Attack()
     {
         anim.SetTrigger("Attack");
-        isAtk=true;
-        
+        isAtk = true;
+
     }
 
     public void Damage(float damage)
     {
         // sau này mỗi thứ sẽ mất 1 kiểu máu khác nên gọi hàm này để nhân vật tụt máu
         Heart.heart -= 10f;
+    }
+
+    public void saveAll()
+    {
+        // hàm save tất cả thông tin
+     
+            BinaryFormatter formatter = new BinaryFormatter();
+            string path = Application.persistentDataPath + "/player.now";
+            FileStream stream = new FileStream(path, FileMode.Create);         
+            formatter.Serialize(stream, pl);
+            stream.Close();
+    
     }
 }
