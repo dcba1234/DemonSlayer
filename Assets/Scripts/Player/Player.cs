@@ -7,17 +7,43 @@ public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     public CharacterController2D controller;
-    [SerializeField] public int test;
+    //[SerializeField] public int test;
     public float horizontalMove = 0f;
     public float runSpeed;
     private Animator anim;
     bool Jump = false;
-    public bool isAtk = false;
+    //public bool isAtk = false;
+
+    //public bool skill1;
 
     public bool skill1;
     public PlayerEntity pl;
     public bool LeftNotRight = false;
-    //public EdgeCollider2D edgeCol2;
+    public bool DirecCast =false;
+    //Attack
+    private float timeBtwAttack;
+    public float startTimeBtwAttack;
+    public Transform attackPos;
+    public float attackRange;
+    public LayerMask whatIsEnemies;
+    public float damage;
+
+    public GameObject gameObject;
+
+    public Enemy_move enemy_Move;
+    //Skill 1
+    public GameObject Skill1;
+
+    public Transform shotPoint;
+    //Skill 2
+    public GameObject Skill2;
+
+    public Transform shotPoint2;
+
+
+    private float timeBtwSkill1;
+
+    public float startTimeBtwSkill1;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -32,6 +58,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         pl.setPosition(transform);
     }
 
@@ -86,8 +113,37 @@ public class Player : MonoBehaviour
 
     public void btn_Skill1()
     {
+        if(timeBtwSkill1 <=0)
+        {
         anim.SetTrigger("CastSkill1");
+        DirecCast = LeftNotRight;
+        //skill1=true;
+        Instantiate(Skill1,shotPoint.position,transform.rotation);
+        timeBtwSkill1 = startTimeBtwSkill1;
+        }
+        else
+        {
+            timeBtwSkill1 -= Time.deltaTime;
+        }
+
         skill1 = true;
+    }
+    
+    public void btn_Skill2()
+    {
+        if(timeBtwSkill1 <=0)
+        {
+        anim.SetTrigger("Attack");
+        DirecCast = LeftNotRight;
+        //skill1=true;
+        Instantiate(Skill2,shotPoint2.position,transform.rotation);
+        timeBtwSkill1 = startTimeBtwSkill1;
+        }
+        else
+        {
+            timeBtwSkill1 -= Time.deltaTime;
+        }
+
     }
     public void onIddle()
     {
@@ -100,11 +156,39 @@ public class Player : MonoBehaviour
 
 
     }
+    string tenOb;
+    string tenEnemy;
     public void Attack()
     {
+        tenEnemy="";
         anim.SetTrigger("Attack");
+        //isAtk=true;
+        
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemies);
+        
+        for(int i= 0; i< enemiesToDamage.Length;i++)
+        {
+            //Debug.Log(i);
+            tenOb = enemiesToDamage[0].ToString();
+            for(int y = 0;y<tenOb.Length-31;y++)
+            {
+                tenEnemy = tenEnemy + tenOb[y];
+            }
+
+            gameObject = GameObject.Find(tenEnemy);
+            enemy_Move = gameObject.GetComponent<Enemy_move>();
+            enemy_Move.TakeDamage(damage);
+            
+        }
+        timeBtwAttack= startTimeBtwAttack;
+        
         isAtk = true;
 
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPos.position,attackRange);    
     }
 
     public void Damage(float damage)

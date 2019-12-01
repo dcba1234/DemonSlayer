@@ -22,26 +22,23 @@ public class Enemy_move : MonoBehaviour
 
     public float MonsterHealth = 1000;
 
-    public Attack attack;
-
-    
-
-    public float blood;
+    // Dazed after Hit
+    private float dazedTime;
+    public float startDazedTime;
+    public float blood = 1;
 
     public bool Hit;
 
     public bool MoveLeft;
 
+    public GameObject bloodEffect;
     //public Bleed bleed;
     void Start()
     {
         anim = GetComponent<Animator>();
         blood = 1;
         Hit = false;
-        //Debug.Log(healthBar.transform.position);
-        attack = GameObject.FindGameObjectWithTag("CheckAttack").GetComponent<Attack>();;
-        //healthBar = GameObject.FindGameObjectWithTag("HB").GetComponent<HealthBar>();
-        //Debug.Log(this.ToString());
+        
     
     }
 
@@ -50,6 +47,7 @@ public class Enemy_move : MonoBehaviour
     {
        if(blood>0)
        {
+        
         if(distance > runSpeed * movingRange)
         {
             MoveLeft = false;
@@ -77,15 +75,15 @@ public class Enemy_move : MonoBehaviour
            anim.SetTrigger("isDie");
            Destroy(gameObject);
        }
-       
-        
-        
-        
-        //else
-       // {
-       //     anim.SetBool("isDie",true);
-
-       // }
+       if(dazedTime <= 0)
+        {
+            runSpeed = 0.1f;
+        }
+        else
+        {
+            runSpeed = 0;
+            dazedTime -= Time.deltaTime;
+        }
         
     }
 
@@ -140,36 +138,15 @@ public class Enemy_move : MonoBehaviour
         // sau này mỗi thứ sẽ mất 1 kiểu máu khác nên gọi hàm này để nhân vật tụt máu
         Heart.heart -= 10f;
     }
-    public List<GameObject> myList;
     
-    void OnTriggerEnter2D(Collider2D other)
+    
+    public void TakeDamage(float damage)
     {
-        if(other.CompareTag("CheckAttack"))
-        {
-            Debug.Log("Hit");
-            //Debug.Log(other.GetInstanceID());
-            Hit=true;
-            
-            float x = attack.dame/MonsterHealth;
-            Debug.Log(attack.dame);
-            blood = blood-x;
-            if(blood > 0)
-            {
-                
-            }
-            else
-            {
-                blood = 0;
-                anim.SetTrigger("isDie");
-            }
-            
-            //bleed.BleedH(blood);
-            //myList.AddRange(GameObject.FindGameObjectsWithTag("enemy"));
-            //    Debug.Log(myList[1]);
-            //    foreach(GameObject item in myList){
-            //        Debug.Log(item);
-
-            //    }
-        }
+        //Instantiate(bloodEffect,transform.position,Quaternion.identity);
+        dazedTime = startDazedTime;
+        Hit=true;
+        blood = blood - damage/MonsterHealth;
+        Debug.Log(damage/MonsterHealth);
+        //Debug.Log("damege Taken");
     }
 }
