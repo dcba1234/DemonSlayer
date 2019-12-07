@@ -33,24 +33,57 @@ public class Player : MonoBehaviour
     public GameObject Skill1;
 
     public Transform shotPoint;
+
+    private float timeBtwSkill1;
+
+    public float startTimeBtwSkill1;
+
+    private bool CoolDownSkill1;
     //Skill 2
     public GameObject Skill2;
 
     public Transform shotPoint2;
 
+    private float timeBtwSkill2;
 
-    private float timeBtwSkill1;
+    public float startTimeBtwSkill2;
 
-    public float startTimeBtwSkill1;
+    private bool CoolDownSkill2;
+
+    //Bar
+    private Mana Mana;
+
+
+    
     void Start()
     {
         anim = GetComponent<Animator>();
-                 
+        Mana= GameObject.FindGameObjectWithTag("Mana").GetComponent<Mana>();     
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(timeBtwSkill2);
+        if(CoolDownSkill1==true)
+        {
+            timeBtwSkill1 -= Time.deltaTime;
+            if(timeBtwSkill1<=0)
+            {
+                CoolDownSkill1=false;
+                Debug.Log("Skill 1");
+            }
+        }
+      
+        if(CoolDownSkill2==true)
+        {
+            timeBtwSkill2 -= Time.deltaTime;
+            if(timeBtwSkill2<=0)
+            {
+                CoolDownSkill2=false;
+                Debug.Log("Skill 2");
+            }
+        }
         
     }
 
@@ -104,35 +137,33 @@ public class Player : MonoBehaviour
 
     public void btn_Skill1()
     {
-        if(timeBtwSkill1 <=0)
+        if(timeBtwSkill1 <=0 && Mana.mana>=10)
         {
         anim.SetTrigger("CastSkill1");
         DirecCast = LeftNotRight;
         //skill1=true;
         Instantiate(Skill1,shotPoint.position,transform.rotation);
         timeBtwSkill1 = startTimeBtwSkill1;
+        Mana.mana = Mana.mana - 10;
+        CoolDownSkill1=true;
         }
-        else
-        {
-            timeBtwSkill1 -= Time.deltaTime;
-        }
+        
 
     }
     
     public void btn_Skill2()
     {
-        if(timeBtwSkill1 <=0)
+        if(timeBtwSkill2 <=0 && Mana.mana>=30)
         {
         anim.SetTrigger("Attack");
         DirecCast = LeftNotRight;
         //skill1=true;
         Instantiate(Skill2,shotPoint2.position,transform.rotation);
-        timeBtwSkill1 = startTimeBtwSkill1;
+        timeBtwSkill2 = startTimeBtwSkill2;
+        Mana.mana = Mana.mana - 30;
+        CoolDownSkill2=true;
         }
-        else
-        {
-            timeBtwSkill1 -= Time.deltaTime;
-        }
+       
 
     }
     public void onIddle()

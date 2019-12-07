@@ -34,7 +34,7 @@ public class Skill2 : MonoBehaviour
             Debug.Log("OK");
             hitInfo.collider.GetComponent<Enemy_move>().TakeDamage(damage);
            //Debug.Log(hitInfo.rigidbody.ToString());
-            DestroySkill1();
+            //DestroySkill1();
         }
         }
         else
@@ -45,7 +45,7 @@ public class Skill2 : MonoBehaviour
         {
             Debug.Log("OK");
             hitInfo.collider.GetComponent<Enemy_move>().TakeDamage(damage);
-            DestroySkill1();
+            //DestroySkill1();
         }
         }
     }

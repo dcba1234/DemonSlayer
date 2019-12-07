@@ -33,7 +33,7 @@ public class Skill1 : MonoBehaviour
         {
             hitInfo.collider.GetComponent<Enemy_move>().TakeDamage(damage);
            //Debug.Log(hitInfo.rigidbody.ToString());
-            //DestroySkill1();
+            DestroySkill1();
         }
         }
         else
@@ -43,7 +43,7 @@ public class Skill1 : MonoBehaviour
         if(hitInfo.collider != null)
         {
             hitInfo.collider.GetComponent<Enemy_move>().TakeDamage(damage);
-            //DestroySkill1();
+            DestroySkill1();
         }
         }
     }
