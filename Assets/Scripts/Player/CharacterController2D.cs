@@ -8,8 +8,7 @@ public class CharacterController2D : MonoBehaviour
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
     [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
-    [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.				
-    [SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
+    [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.				            // A collider that will be disabled when crouching
 
     const float k_GroundedRadius = .15f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
@@ -63,18 +62,10 @@ public class CharacterController2D : MonoBehaviour
         if (m_Grounded || m_AirControl)
         {
 
-            // If crouching
-
-            // Enable the collider when not crouching
-            if (m_CrouchDisableCollider != null)
-                m_CrouchDisableCollider.enabled = true;
-
-
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
-
             // If the input is moving the player right and the player is facing left...
             if (move > 0 && !m_FacingRight)
             {
@@ -96,6 +87,11 @@ public class CharacterController2D : MonoBehaviour
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
+    }
+
+    public void Blink(Vector3 vt)
+    {
+        m_Rigidbody2D.transform.position = vt;
     }
 
 

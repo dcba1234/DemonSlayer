@@ -31,10 +31,16 @@ public class Skill2 : MonoBehaviour
            transform.Translate(transform.right * speed * Time.deltaTime *-1);
         if(hitInfo.collider != null)
         {
+            try
+            {
             Debug.Log("OK");
             hitInfo.collider.GetComponent<Enemy_move>().TakeDamage(damage);
-           //Debug.Log(hitInfo.rigidbody.ToString());
-            //DestroySkill1();
+            }
+            catch
+            {
+                 Debug.Log("trung tuong");
+                 DestroySkill1();
+            }
         }
         }
         else
@@ -43,8 +49,15 @@ public class Skill2 : MonoBehaviour
         transform.Translate(transform.right * speed * Time.deltaTime);
         if(hitInfo.collider != null)
         {
+            try{
             Debug.Log("OK");
             hitInfo.collider.GetComponent<Enemy_move>().TakeDamage(damage);
+            }
+            catch
+            {
+                Debug.Log("trung tuong");
+                DestroySkill1();
+            }
             //DestroySkill1();
         }
         }

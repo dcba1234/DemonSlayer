@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -9,13 +9,15 @@ public class Player : MonoBehaviour
     public CharacterController2D controller;
     //[SerializeField] public int test;
     public float horizontalMove = 0f;
-    public float runSpeed ;
+    public float runSpeed;
     private Animator anim;
     bool Jump = false;
     //public bool isAtk = false;
 
     //public bool skill1;
 
+    public bool skill1;
+    public PlayerEntity pl;
     public bool LeftNotRight = false;
     public bool DirecCast =false;
     //Attack
@@ -38,7 +40,7 @@ public class Player : MonoBehaviour
 
     public float startTimeBtwSkill1;
 
-    private bool CoolDownSkill1;
+    public float ManaLostS1;
     //Skill 2
     public GameObject Skill2;
 
@@ -48,7 +50,8 @@ public class Player : MonoBehaviour
 
     public float startTimeBtwSkill2;
 
-    private bool CoolDownSkill2;
+    public float ManaLostS2;
+    
 
     //Bar
     private Mana Mana;
@@ -58,33 +61,36 @@ public class Player : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+
         Mana= GameObject.FindGameObjectWithTag("Mana").GetComponent<Mana>();     
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(timeBtwSkill2);
-        if(CoolDownSkill1==true)
+        
+        if(timeBtwSkill1>=0)
         {
             timeBtwSkill1 -= Time.deltaTime;
             if(timeBtwSkill1<=0)
             {
-                CoolDownSkill1=false;
                 Debug.Log("Skill 1");
             }
         }
       
-        if(CoolDownSkill2==true)
+        if(timeBtwSkill2>=0)
         {
             timeBtwSkill2 -= Time.deltaTime;
             if(timeBtwSkill2<=0)
             {
-                CoolDownSkill2=false;
+               
                 Debug.Log("Skill 2");
             }
         }
         
+        pl.setPosition(transform);
     }
 
     private void FixedUpdate()
@@ -97,6 +103,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            saveAll();
             anim.SetBool("isJumping", true);
         }
     }
@@ -107,7 +114,7 @@ public class Player : MonoBehaviour
         anim.SetBool("isJumping", true);
         controller.Move(horizontalMove, false, Jump);
         Jump = false;
-        
+
     }
 
     public void btn_leftOnClick()
@@ -119,13 +126,13 @@ public class Player : MonoBehaviour
             anim.SetBool("isWalking", true);
         else anim.SetBool("isWalking", false);
         controller.Move(horizontalMove, false, Jump);
-        LeftNotRight=true;
-        
+        LeftNotRight = true;
+
     }
 
     public void btn_rightOnClick()
     {
-        
+
         if (this.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) return;
         horizontalMove = runSpeed;
         if (Jump != true)
@@ -137,31 +144,32 @@ public class Player : MonoBehaviour
 
     public void btn_Skill1()
     {
-        if(timeBtwSkill1 <=0 && Mana.mana>=10)
+        if(timeBtwSkill1 <=0 && Mana.mana>=ManaLostS1)
         {
         anim.SetTrigger("CastSkill1");
         DirecCast = LeftNotRight;
-        //skill1=true;
+        
         Instantiate(Skill1,shotPoint.position,transform.rotation);
         timeBtwSkill1 = startTimeBtwSkill1;
-        Mana.mana = Mana.mana - 10;
-        CoolDownSkill1=true;
+        Mana.mana = Mana.mana - ManaLostS1;
+        
         }
         
 
+        skill1 = true;
     }
     
     public void btn_Skill2()
     {
-        if(timeBtwSkill2 <=0 && Mana.mana>=30)
+        if(timeBtwSkill2 <=0 && Mana.mana>=ManaLostS2)
         {
         anim.SetTrigger("Attack");
         DirecCast = LeftNotRight;
-        //skill1=true;
+       
         Instantiate(Skill2,shotPoint2.position,transform.rotation);
         timeBtwSkill2 = startTimeBtwSkill2;
-        Mana.mana = Mana.mana - 30;
-        CoolDownSkill2=true;
+        Mana.mana = Mana.mana - ManaLostS2;
+        
         }
        
 
@@ -174,8 +182,8 @@ public class Player : MonoBehaviour
             anim.SetBool("isWalking", false);
             horizontalMove = 0;
         }
-        
-        
+
+
     }
     string tenOb;
     string tenEnemy;
@@ -203,6 +211,7 @@ public class Player : MonoBehaviour
         }
         timeBtwAttack= startTimeBtwAttack;
         
+
     }
     void OnDrawGizmosSelected()
     {
@@ -214,5 +223,17 @@ public class Player : MonoBehaviour
     {
         // sau này mỗi thứ sẽ mất 1 kiểu máu khác nên gọi hàm này để nhân vật tụt máu
         Heart.heart -= 10f;
+    }
+
+    public void saveAll()
+    {
+        // hàm save tất cả thông tin
+     
+            BinaryFormatter formatter = new BinaryFormatter();
+            string path = Application.persistentDataPath + "/player.now";
+            FileStream stream = new FileStream(path, FileMode.Create);         
+            formatter.Serialize(stream, pl);
+            stream.Close();
+    
     }
 }

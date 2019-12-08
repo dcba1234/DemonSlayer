@@ -11,6 +11,7 @@ TagManager:
   - Bar
   - HB
   - Skill1
+  - Mana
   layers:
   - Default
   - TransparentFX
