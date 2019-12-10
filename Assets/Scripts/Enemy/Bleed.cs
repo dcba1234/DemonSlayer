@@ -11,7 +11,7 @@ public class Bleed : MonoBehaviour
     //public bool die;
 
     public Enemy_move enemy_Move;
-    public GameObject player;
+    //public GameObject player;
 
     void Start()
     {
@@ -19,10 +19,19 @@ public class Bleed : MonoBehaviour
         
 
         //Debug.Log(obj.name);
-        player = transform.parent.parent.gameObject;
-        enemy_Move = player.GetComponent<Enemy_move>();
+        string name = transform.parent.gameObject.name;
+        string nameEnemy="";
+        Debug.Log(name);
+        for(int i=9;i<name.Length;i++)
+        {
+            
+           nameEnemy = nameEnemy + name[i];
+        }
         
-        //Debug.Log(player.transform.root);
+        enemy_Move = GameObject.Find(nameEnemy).GetComponent<Enemy_move>();
+        //enemy_Move = player.GetComponent<Enemy_move>();
+        
+        
        
     }
 

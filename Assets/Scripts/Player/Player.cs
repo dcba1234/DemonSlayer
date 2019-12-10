@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
 
         Mana= GameObject.FindGameObjectWithTag("Mana").GetComponent<Mana>();     
 
-
+     
     }
 
     // Update is called once per frame
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
             timeBtwSkill1 -= Time.deltaTime;
             if(timeBtwSkill1<=0)
             {
-                Debug.Log("Skill 1");
+                //Debug.Log("Skill 1");
             }
         }
       
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
             if(timeBtwSkill2<=0)
             {
                
-                Debug.Log("Skill 2");
+                //Debug.Log("Skill 2");
             }
         }
         
