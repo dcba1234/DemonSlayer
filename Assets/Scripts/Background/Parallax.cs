@@ -21,9 +21,9 @@ public class Parallax : MonoBehaviour
         float tem = (cam.transform.position.x * (1 - para));
         float dist = (cam.transform.position.x) * para;
         transform.position = new Vector3(start + dist, transform.position.y, transform.position.z);
-       /* if (tem > start + leng)
+        if (tem > start + leng)
             start = start + leng;
         else if (tem < start - leng)
-            start = start - leng;*/
+            start = start - leng;
     }
 }
