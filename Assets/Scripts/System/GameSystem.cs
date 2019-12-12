@@ -10,10 +10,12 @@ public class GameSystem
 {
     public static int soundVolume = 100;
     public static int musicVolume = 100;
+    public static SystemLanguage gameLanguage = Application.systemLanguage;
     public const string saveFileName = "/player.now";
     public static void test()
     {
         Debug.Log(soundVolume);
+        changeLanguage(SystemLanguage.Vietnamese);
     }
 
 
@@ -72,4 +74,10 @@ public class GameSystem
     {
         Application.Quit();
     }
+    
+    public static void changeLanguage(SystemLanguage language)
+    {
+        gameLanguage = language;
+    }
+       
 }
