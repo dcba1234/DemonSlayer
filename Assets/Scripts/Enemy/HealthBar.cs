@@ -7,36 +7,44 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     public Enemy_move enemy_Move;
     public GameObject player;
+
+    private float x;
+    private float y;
+    private float z;
+    
     void Start()
     {
-        player = transform.parent.gameObject;
-        enemy_Move = player.GetComponent<Enemy_move>();
-       
+        string name = gameObject.name;
+        string nameEnemy="";
+        
+        for(int i=9;i<name.Length;i++)
+        {
+            
+            nameEnemy = nameEnemy + name[i];
+        }
+        try
+        {
+        enemy_Move = GameObject.Find(nameEnemy).GetComponent<Enemy_move>();
+        }
+        catch
+        {
+            Destroy(gameObject);
+        }
+        
     }
-    public bool Direc;
     
     int i = 1;
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        if(i == 1)
-        {
-           Direc = enemy_Move.MoveLeft;
-           i = i +1;
-           
-        }
-        if(Direc != enemy_Move.MoveLeft)
+        transform.position = new Vector3(enemy_Move.locationX(x),enemy_Move.locationY(y),enemy_Move.locationZ(z));
+        if(enemy_Move.blood<=0)
         {
             
-            transform.localScale = new Vector3(transform.localScale[0] * -1 ,1,1);
-            Direc = enemy_Move.MoveLeft;        
+            Destroy(gameObject);
+            
+            
         }
-        //Debug.Log(Direc);
-        //Debug.Log(enemy_Move.MoveLeft);
     }
-    public void FlipHB()
-    {
-        transform.localScale = new Vector3(transform.localScale[0] * -1 ,1,1);
-    }
+    
 }

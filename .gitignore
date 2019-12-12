@@ -10,7 +10,8 @@ Assets/AssetStoreTools*
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #
- 
+
+ProjectVersion.txt
 ExportedObj/
 *.svd
 *.userprefs
@@ -25,7 +26,7 @@ ExportedObj/
 # ============ #
 # OS generated #
 # ============ #
- 
+
 .DS_Store
 .DS_Store?
 ._*

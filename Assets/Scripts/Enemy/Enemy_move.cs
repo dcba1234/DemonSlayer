@@ -29,8 +29,26 @@ public class Enemy_move : MonoBehaviour
 
     public bool Hit;
 
-    public bool MoveLeft;
-
+    
+    // Location
+    public float locationX(float x)
+    {
+        x= transform.position.x;
+        
+        return x;
+    }
+    public float locationY(float y)
+    {
+        y= transform.position.y;
+       
+        return y;
+    }
+    public float locationZ(float z)
+    {
+        z= transform.position.z;
+        
+        return z;
+    }
     public GameObject bloodEffect;
     //public Bleed bleed;
     void Start()
@@ -38,10 +56,10 @@ public class Enemy_move : MonoBehaviour
         anim = GetComponent<Animator>();
         blood = 1;
         Hit = false;
+       
         
-    
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -50,7 +68,7 @@ public class Enemy_move : MonoBehaviour
         
         if(distance > runSpeed * movingRange)
         {
-            MoveLeft = false;
+            
             btn_rightOnClick();
             
             distance += runSpeed;
@@ -65,7 +83,7 @@ public class Enemy_move : MonoBehaviour
         }
         else
         {
-            MoveLeft=true;
+           
             btn_leftOnClick();
             distance += runSpeed;
         }
@@ -149,4 +167,6 @@ public class Enemy_move : MonoBehaviour
         Debug.Log(damage/MonsterHealth);
         //Debug.Log("damege Taken");
     }
+
+    
 }
