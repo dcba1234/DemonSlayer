@@ -36,12 +36,15 @@ public class Skill1 : MonoBehaviour
             hitInfo.collider.GetComponent<Enemy_move>().TakeDamage(damage);
            //Debug.Log(hitInfo.rigidbody.ToString());
             DestroySkill1();
+<<<<<<< Updated upstream
             }
             catch
             {
                 Debug.Log("trung tuong");
                 DestroySkill1();
             }
+=======
+>>>>>>> Stashed changes
         }
         }
         else
@@ -54,12 +57,15 @@ public class Skill1 : MonoBehaviour
             {
             hitInfo.collider.GetComponent<Enemy_move>().TakeDamage(damage);
             DestroySkill1();
+<<<<<<< Updated upstream
             }
             catch
             {
                 Debug.Log("trung tuong");
                 DestroySkill1();
             }
+=======
+>>>>>>> Stashed changes
         }
         }
     }
