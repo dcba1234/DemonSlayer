@@ -11,10 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/TienThanh.unity
     guid: c23a437d4eb065e4fbe858a4a2e62f20
   - enabled: 0
     path: Assets/AnhTuan_demo1time.unity
     guid: 4abf52ef6dc251f4782382abda4d58c4
+  - enabled: 1
+    path: Assets/MainMenu.unity
+    guid: 5687ce3938b47774d92e551d4d27c7ea
   m_configObjects: {}
