@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 
     //public bool skill1;
 
-    public bool skill1;
+    //public bool skill1;
     public PlayerEntity pl;
     public bool LeftNotRight = false;
     public bool DirecCast =false;
@@ -56,7 +56,10 @@ public class Player : MonoBehaviour
     //Bar
     private Mana Mana;
 
+    private Heart Heart;
 
+    //TimeHitByBot
+    
     
     void Start()
     {
@@ -64,7 +67,9 @@ public class Player : MonoBehaviour
 
         Mana= GameObject.FindGameObjectWithTag("Mana").GetComponent<Mana>();     
 
-     
+        Heart = GameObject.FindGameObjectWithTag("Heart").GetComponent<Heart>();
+
+        Damage(50f);
     }
 
     // Update is called once per frame
@@ -156,7 +161,7 @@ public class Player : MonoBehaviour
         }
         
 
-        skill1 = true;
+        //skill1 = true;
     }
     
     public void btn_Skill2()
@@ -222,7 +227,9 @@ public class Player : MonoBehaviour
     public void Damage(float damage)
     {
         // sau này mỗi thứ sẽ mất 1 kiểu máu khác nên gọi hàm này để nhân vật tụt máu
-        Heart.heart -= 10f;
+        anim.SetTrigger("Hurt");
+        Heart.heart = Heart.heart - damage;
+        transform.position = new Vector3(transform.position.x-0.5f,transform.position.y,transform.position.z);
     }
 
     public void saveAll()
@@ -236,4 +243,5 @@ public class Player : MonoBehaviour
             stream.Close();
     
     }
+    
 }

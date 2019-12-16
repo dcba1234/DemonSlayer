@@ -12,6 +12,7 @@ TagManager:
   - HB
   - Skill1
   - Mana
+  - Heart
   layers:
   - Default
   - TransparentFX

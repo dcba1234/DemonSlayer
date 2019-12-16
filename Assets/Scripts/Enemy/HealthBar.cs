@@ -37,6 +37,8 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        try
+        {
         transform.position = new Vector3(enemy_Move.locationX(x),enemy_Move.locationY(y),enemy_Move.locationZ(z));
         if(enemy_Move.blood<=0)
         {
@@ -44,6 +46,11 @@ public class HealthBar : MonoBehaviour
             Destroy(gameObject);
             
             
+        }
+        }
+        catch
+        {
+            Destroy(gameObject);
         }
     }
     
