@@ -48,6 +48,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -130,11 +131,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707eb1677381eb84bb914334cbe99f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  lifeTime: 0.5
+  speed: 7
+  lifeTime: 1
   player: {fileID: 0}
-  distance: 0.5
-  damage: 1000
+  distance: 1
+  damage: 100
   whatisSolid:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
