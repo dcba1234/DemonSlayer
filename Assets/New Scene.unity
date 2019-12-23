@@ -3052,7 +3052,7 @@ MonoBehaviour:
     Diamond: 0
   LeftNotRight: 0
   DirecCast: 0
-  startTimeBtwAttack: 0.3
+  startTimeBtwAttack: 2
   attackPos: {fileID: 1198764258}
   attackRange: 0.64
   whatIsEnemies:

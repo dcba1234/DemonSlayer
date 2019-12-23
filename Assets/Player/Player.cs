@@ -58,9 +58,7 @@ public class Player : MonoBehaviour
 
     private Heart Heart;
 
-    //TimeHitByBot
     
-
     
     void Start()
     {
@@ -70,7 +68,10 @@ public class Player : MonoBehaviour
 
         Heart = GameObject.FindGameObjectWithTag("Heart").GetComponent<Heart>();
 
-        //Damage(50f);
+        //Check thu Lay
+        //Damage(20f);
+        //Damage(20f);
+        //Damage(20f);
     }
 
     // Update is called once per frame
@@ -97,7 +98,18 @@ public class Player : MonoBehaviour
             timeBtwSkill2 -= Time.deltaTime;
             
         }
-        
+        if(timeToFall>0)
+        {
+            timeToFall -= Time.deltaTime;
+        }
+        if(timetoUp>0)
+        {
+            timetoUp -= Time.deltaTime;
+            if(timetoUp<0)
+            {
+                anim.SetBool("Lay",false);
+            }
+        }
         pl.setPosition(transform);
     }
 
@@ -243,13 +255,29 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position,attackRange);    
     }
+    //Fall + Lay
 
+    float timeToFall ;
+    float timetoUp ;
+    float stackAtt = 0;
     public void Damage(float damage)
     {
         // sau này mỗi thứ sẽ mất 1 kiểu máu khác nên gọi hàm này để nhân vật tụt máu
+        timeToFall = 2f;
         anim.SetTrigger("Hurt");
         Heart.heart = Heart.heart - damage;
         transform.position = new Vector3(transform.position.x-0.5f,transform.position.y,transform.position.z);
+        stackAtt++;
+        if(stackAtt==3)
+        {
+            stackAtt=0;
+            if(timeToFall>0)
+            {
+                anim.SetTrigger("Fall");
+                anim.SetBool("Lay",true);
+                timetoUp = 3f;
+            }
+        }
     }
 
     public void saveAll()
