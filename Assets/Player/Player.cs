@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
 
     //TimeHitByBot
     
+
     
     void Start()
     {
@@ -69,30 +70,32 @@ public class Player : MonoBehaviour
 
         Heart = GameObject.FindGameObjectWithTag("Heart").GetComponent<Heart>();
 
-        Damage(50f);
+        //Damage(50f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(timeBtwAttack>=0)
+        {
+            timeBtwAttack -= Time.deltaTime;
+            //Debug.Log(timeBtwAttack);
+            if(timeBtwAttack<0)
+            {
+                A1=true;
+                A2=false;
+            }
+        }
         if(timeBtwSkill1>=0)
         {
             timeBtwSkill1 -= Time.deltaTime;
-            if(timeBtwSkill1<=0)
-            {
-                //Debug.Log("Skill 1");
-            }
+            
         }
       
         if(timeBtwSkill2>=0)
         {
             timeBtwSkill2 -= Time.deltaTime;
-            if(timeBtwSkill2<=0)
-            {
-               
-                //Debug.Log("Skill 2");
-            }
+            
         }
         
         pl.setPosition(transform);
@@ -192,12 +195,31 @@ public class Player : MonoBehaviour
     }
     string tenOb;
     string tenEnemy;
+    bool A1 = true;
+    bool A2 = false;
     public void Attack()
     {
         tenEnemy="";
+        if(A2==false && A1==false)
+        {
+            anim.SetTrigger("Attack3");
+            attackRange = 0.8f;
+            //A1=true;
+        }
+        if(A2==true && timeBtwAttack>0)
+        {
+            anim.SetTrigger("Attack2");
+            A2=false;
+            timeBtwAttack= startTimeBtwAttack;
+        }
+        if(A1==true)
+        {
+            attackRange = 0.6f;
         anim.SetTrigger("Attack");
-        //isAtk=true;
-        
+        A1=false;
+        timeBtwAttack= startTimeBtwAttack;
+        A2=true;
+        }
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemies);
         
         for(int i= 0; i< enemiesToDamage.Length;i++)
@@ -214,9 +236,7 @@ public class Player : MonoBehaviour
             enemy_Move.TakeDamage(damage);
             
         }
-        timeBtwAttack= startTimeBtwAttack;
-        
-
+            
     }
     void OnDrawGizmosSelected()
     {
