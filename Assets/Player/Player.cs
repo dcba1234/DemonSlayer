@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
 
     private Heart Heart;
 
-    //TimeHitByBot
     
     
     void Start()
@@ -69,32 +68,48 @@ public class Player : MonoBehaviour
 
         Heart = GameObject.FindGameObjectWithTag("Heart").GetComponent<Heart>();
 
-        Damage(50f);
+        //Check thu Lay
+        //Damage(20f);
+        //Damage(20f);
+        //Damage(20f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(timeBtwAttack>=0)
+        {
+            timeBtwAttack -= Time.deltaTime;
+            //Debug.Log(timeBtwAttack);
+            if(timeBtwAttack<0)
+            {
+                A1=true;
+                A2=false;
+            }
+        }
         if(timeBtwSkill1>=0)
         {
             timeBtwSkill1 -= Time.deltaTime;
-            if(timeBtwSkill1<=0)
-            {
-                //Debug.Log("Skill 1");
-            }
+            
         }
       
         if(timeBtwSkill2>=0)
         {
             timeBtwSkill2 -= Time.deltaTime;
-            if(timeBtwSkill2<=0)
+            
+        }
+        if(timeToFall>0)
+        {
+            timeToFall -= Time.deltaTime;
+        }
+        if(timetoUp>0)
+        {
+            timetoUp -= Time.deltaTime;
+            if(timetoUp<0)
             {
-               
-                //Debug.Log("Skill 2");
+                anim.SetBool("Lay",false);
             }
         }
-        
         pl.setPosition(transform);
     }
 
@@ -192,12 +207,31 @@ public class Player : MonoBehaviour
     }
     string tenOb;
     string tenEnemy;
+    bool A1 = true;
+    bool A2 = false;
     public void Attack()
     {
         tenEnemy="";
+        if(A2==false && A1==false)
+        {
+            anim.SetTrigger("Attack3");
+            attackRange = 0.8f;
+            //A1=true;
+        }
+        if(A2==true && timeBtwAttack>0)
+        {
+            anim.SetTrigger("Attack2");
+            A2=false;
+            timeBtwAttack= startTimeBtwAttack;
+        }
+        if(A1==true)
+        {
+            attackRange = 0.6f;
         anim.SetTrigger("Attack");
-        //isAtk=true;
-        
+        A1=false;
+        timeBtwAttack= startTimeBtwAttack;
+        A2=true;
+        }
         Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemies);
         
         for(int i= 0; i< enemiesToDamage.Length;i++)
@@ -214,22 +248,36 @@ public class Player : MonoBehaviour
             enemy_Move.TakeDamage(damage);
             
         }
-        timeBtwAttack= startTimeBtwAttack;
-        
-
+            
     }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position,attackRange);    
     }
+    //Fall + Lay
 
+    float timeToFall ;
+    float timetoUp ;
+    float stackAtt = 0;
     public void Damage(float damage)
     {
         // sau này mỗi thứ sẽ mất 1 kiểu máu khác nên gọi hàm này để nhân vật tụt máu
+        timeToFall = 2f;
         anim.SetTrigger("Hurt");
         Heart.heart = Heart.heart - damage;
         transform.position = new Vector3(transform.position.x-0.5f,transform.position.y,transform.position.z);
+        stackAtt++;
+        if(stackAtt==3)
+        {
+            stackAtt=0;
+            if(timeToFall>0)
+            {
+                anim.SetTrigger("Fall");
+                anim.SetBool("Lay",true);
+                timetoUp = 3f;
+            }
+        }
     }
 
     public void saveAll()
