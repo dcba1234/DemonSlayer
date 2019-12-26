@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuScripts : MonoBehaviour
 {
+    public Animator ani;
+    public Image img;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        img = gameObject.GetComponent<Image>();
+    }
     void Start()
     {
         
@@ -16,7 +23,15 @@ public class MenuScripts : MonoBehaviour
     {
         if(Input.touchCount > 0 || Input.GetKeyDown(KeyCode.Mouse0))
         {
-            SceneManager.LoadScene("Main2");
+            //SceneManager.LoadScene("Main");
+            //Touch a = Input.GetTouch(0);
+            //Debug.Log(a.deltaPosition);
         }
+    }
+
+    public void FadedIn()
+    {
+        img.enabled = false;
+        Debug.Log("Detroyed");
     }
 }
