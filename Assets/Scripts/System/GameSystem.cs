@@ -11,7 +11,8 @@ public class GameSystem
     public static int soundVolume = 100;
     public static int musicVolume = 100;
     public static SystemLanguage gameLanguage = Application.systemLanguage;
-    public const string saveFileName = "/player.now";
+    public const string playerSaveFileName = "/player.now";
+    public const string settingSaveFileName = "/setting.now";
     public static void test()
     {
         Debug.Log(soundVolume);
@@ -25,7 +26,7 @@ public class GameSystem
     public static void saveGame(PlayerEntity info)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + saveFileName;
+        string path = Application.persistentDataPath + playerSaveFileName;
         FileStream stream = new FileStream(path, FileMode.Create);
         formatter.Serialize(stream, info);
         stream.Close();
@@ -39,7 +40,7 @@ public class GameSystem
     {
         PlayerEntity player = new PlayerEntity();
         // do smt
-        string path = Application.persistentDataPath + saveFileName;
+        string path = Application.persistentDataPath + playerSaveFileName;
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -79,5 +80,30 @@ public class GameSystem
     {
         gameLanguage = language;
     }
-       
+
+    public static void saveGameSettings(GameSetting gameSetting)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + settingSaveFileName;
+        FileStream stream = new FileStream(path, FileMode.Create);
+        formatter.Serialize(stream, gameSetting);
+        stream.Close();
+    }
+
+    public static GameSetting loadGameSettings()
+    {
+        GameSetting setting = new GameSetting(true,true,true);
+        // do smt
+        string path = Application.persistentDataPath + settingSaveFileName;
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+            setting = formatter.Deserialize(stream) as GameSetting;
+            stream.Close();
+        }
+        return setting;
+    }
+
+
 }
