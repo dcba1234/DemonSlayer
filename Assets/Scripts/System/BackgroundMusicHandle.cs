@@ -9,7 +9,12 @@ public class BackgroundMusicHandle : MonoBehaviour
     void Start()
     {
         bgMusic = GetComponent<AudioSource>();
-        bgMusic.enabled = true;
+        GameSetting setting = GameSystem.loadGameSettings();
+        if (setting.music)
+        {
+            bgMusic.enabled = true;
+        }
+        else bgMusic.enabled = false;
     }
 
     // Update is called once per frame
