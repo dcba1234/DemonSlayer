@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     public bool DirecCast =false;
     //Attack
     private float timeBtwAttack;
-    public float startTimeBtwAttack;
+    private float startTimeBtwAttack = 2f;
     public Transform attackPos;
     public float attackRange;
     public LayerMask whatIsEnemies;
