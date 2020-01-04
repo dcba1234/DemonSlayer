@@ -14,6 +14,7 @@ TagManager:
   - Mana
   - Heart
   - BackgroundMusic
+  - LoadingBar
   layers:
   - Default
   - TransparentFX

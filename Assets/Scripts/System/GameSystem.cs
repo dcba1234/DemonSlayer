@@ -13,6 +13,7 @@ public class GameSystem
     public static SystemLanguage gameLanguage = Application.systemLanguage;
     public const string playerSaveFileName = "/player.now";
     public const string settingSaveFileName = "/setting.now";
+    public const string isFisrtTimeSaveFileName = "/isFirstTime.now";
     public static void test()
     {
         Debug.Log(soundVolume);
@@ -90,6 +91,18 @@ public class GameSystem
         stream.Close();
     }
 
+    public static bool isfistTime()
+    {
+        bool result = true;
+        string path = Application.persistentDataPath + isFisrtTimeSaveFileName;
+        if (File.Exists(path))
+        {
+
+            return false;
+        }
+        return true;
+    }
+
     public static GameSetting loadGameSettings()
     {
         GameSetting setting = new GameSetting(true,true,true);
@@ -97,6 +110,7 @@ public class GameSystem
         string path = Application.persistentDataPath + settingSaveFileName;
         if (File.Exists(path))
         {
+            
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
             setting = formatter.Deserialize(stream) as GameSetting;
