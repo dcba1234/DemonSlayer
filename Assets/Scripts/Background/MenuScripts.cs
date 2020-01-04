@@ -32,6 +32,5 @@ public class MenuScripts : MonoBehaviour
     public void FadedIn()
     {
         img.enabled = false;
-        Debug.Log("Detroyed");
     }
 }

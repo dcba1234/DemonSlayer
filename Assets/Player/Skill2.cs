@@ -15,15 +15,31 @@ public class Skill2 : MonoBehaviour
 
     public float damage;
     public LayerMask whatisSolid;
+
+    public static AudioClip SkillSound;
+    static AudioSource audioSource;
+    //
+    private float TstartSound = -1f;
+    private float SoundEnd = 2f;
+
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
         Invoke("DestroySkill1",lifeTime);
+        SkillSound = Resources.Load<AudioClip>("WindSkill2");
+        audioSource = GetComponent<AudioSource>();
+        //TstartSound = SoundEnd;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(TstartSound<0)
+        {
+            TstartSound = SoundEnd;
+            PlaySound();
+        }
+        TstartSound = TstartSound - Time.deltaTime;
         if(player.DirecCast == true)
         {
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position,transform.right * -1,distance,whatisSolid);
@@ -66,5 +82,9 @@ public class Skill2 : MonoBehaviour
     {
         //Instantiate(destroyEffect,transform.position,Quaternion.identity);
         Destroy(gameObject);
+    }
+    public void PlaySound()
+    {
+        audioSource.PlayOneShot(SkillSound);
     }
 }
