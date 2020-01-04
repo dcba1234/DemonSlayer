@@ -57,7 +57,9 @@ public class Player : MonoBehaviour
     private Mana Mana;
 
     private Heart Heart;
-
+    //TimeSoundWalk
+    private float TSW = 0.7f;
+    private float startTSW = -1f;
     
     
     void Start()
@@ -67,7 +69,7 @@ public class Player : MonoBehaviour
         Mana= GameObject.FindGameObjectWithTag("Mana").GetComponent<Mana>();     
 
         Heart = GameObject.FindGameObjectWithTag("Heart").GetComponent<Heart>();
-
+        //Debug.Log(transform.position.x);
         //Check thu Lay
         //Damage(20f);
         //Damage(20f);
@@ -147,6 +149,12 @@ public class Player : MonoBehaviour
         else anim.SetBool("isWalking", false);
         controller.Move(horizontalMove, false, Jump);
         LeftNotRight = true;
+        if(startTSW < 0)
+        {
+        SoundManager.PlaySound("Walk");
+        startTSW = TSW;
+        }
+        startTSW = startTSW - Time.deltaTime;
 
     }
 
@@ -160,6 +168,12 @@ public class Player : MonoBehaviour
         else anim.SetBool("isWalking", false);
         controller.Move(horizontalMove, false, Jump);
         LeftNotRight = false;
+        if(startTSW < 0)
+        {
+        SoundManager.PlaySound("Walk");
+        startTSW = TSW;
+        }
+        startTSW = startTSW - Time.deltaTime;
     }
 
     public void btn_Skill1()
@@ -181,6 +195,7 @@ public class Player : MonoBehaviour
     
     public void btn_Skill2()
     {
+        //Skill2.PlaySound();
         if(timeBtwSkill2 <=0 && Mana.mana>=ManaLostS2)
         {
         anim.SetTrigger("Attack");
@@ -232,8 +247,18 @@ public class Player : MonoBehaviour
         timeBtwAttack= startTimeBtwAttack;
         A2=true;
         }
-        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemies);
         
+        Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemies);
+        //Debug.Log(enemiesToDamage);
+        if(enemiesToDamage.Length>0)
+        {
+            //Debug.Log(enemiesToDamage);
+            SoundManager.PlaySound("AttHit");
+        }
+        else
+        {
+            SoundManager.PlaySound("Attack");
+        }
         for(int i= 0; i< enemiesToDamage.Length;i++)
         {
             //Debug.Log(i);
@@ -266,7 +291,7 @@ public class Player : MonoBehaviour
         timeToFall = 2f;
         anim.SetTrigger("Hurt");
         Heart.heart = Heart.heart - damage;
-        transform.position = new Vector3(transform.position.x-0.5f,transform.position.y,transform.position.z);
+        //transform.position = new Vector3(transform.position.x-0.5f,transform.position.y,transform.position.z);
         stackAtt++;
         if(stackAtt==3)
         {
@@ -278,6 +303,7 @@ public class Player : MonoBehaviour
                 timetoUp = 3f;
             }
         }
+        SoundManager.PlaySound("GetHit");
     }
 
     public void saveAll()

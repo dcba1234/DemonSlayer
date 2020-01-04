@@ -21,7 +21,7 @@ public class Bleed : MonoBehaviour
         //Debug.Log(obj.name);
         string name = transform.parent.gameObject.name;
         string nameEnemy="";
-        Debug.Log(name);
+        //Debug.Log(name);
         for(int i=9;i<name.Length;i++)
         {
             
