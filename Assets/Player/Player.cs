@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         Mana= GameObject.FindGameObjectWithTag("Mana").GetComponent<Mana>();     
 
         Heart = GameObject.FindGameObjectWithTag("Heart").GetComponent<Heart>();
-
+        //Debug.Log(transform.position.x);
         //Check thu Lay
         //Damage(20f);
         //Damage(20f);
@@ -291,7 +291,7 @@ public class Player : MonoBehaviour
         timeToFall = 2f;
         anim.SetTrigger("Hurt");
         Heart.heart = Heart.heart - damage;
-        transform.position = new Vector3(transform.position.x-0.5f,transform.position.y,transform.position.z);
+        //transform.position = new Vector3(transform.position.x-0.5f,transform.position.y,transform.position.z);
         stackAtt++;
         if(stackAtt==3)
         {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO;
 public class Enemy_move : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -53,9 +53,11 @@ public class Enemy_move : MonoBehaviour
     //public Bleed bleed;
     void Start()
     {
+        Debug.Log("Start");
         anim = GetComponent<Animator>();
         blood = 1;
         Hit = false;
+        
        
         
     }
@@ -65,12 +67,19 @@ public class Enemy_move : MonoBehaviour
     {
        if(blood>0)
        {
-        
+                  
         if(distance > runSpeed * movingRange)
         {
             
             btn_rightOnClick();
-            
+            if(transform.localScale.x > 0)
+            {
+
+            }
+            else
+            {
+                transform.localScale = new Vector3(transform.localScale.x * -1,transform.localScale.y,transform.localScale.z);
+            }
             distance += runSpeed;
             if (distance > runSpeed * movingRange * 2)
             {
@@ -83,7 +92,14 @@ public class Enemy_move : MonoBehaviour
         }
         else
         {
-           
+            if(transform.localScale.x < 0)
+            {
+
+            }
+            else
+            {
+                transform.localScale = new Vector3(transform.localScale.x * -1,transform.localScale.y,transform.localScale.z);
+            }
             btn_leftOnClick();
             distance += runSpeed;
         }
