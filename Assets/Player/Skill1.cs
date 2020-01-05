@@ -140,6 +140,8 @@ public class Skill1 : MonoBehaviour
     }
     public void PlaySound(string clip)
     {
+        //if(SettingUI.drafSetting.sound == true)
+        //{
         switch(clip){
             case "Sound":
                 audioSource.PlayOneShot(SkillSound);
@@ -149,5 +151,6 @@ public class Skill1 : MonoBehaviour
                 break;
             
         }
+        //}
     }
 }

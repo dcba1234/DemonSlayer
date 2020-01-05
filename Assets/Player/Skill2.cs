@@ -85,6 +85,9 @@ public class Skill2 : MonoBehaviour
     }
     public void PlaySound()
     {
+        //if(SettingUI.drafSetting.sound == true)
+        //{
         audioSource.PlayOneShot(SkillSound);
+        //}
     }
 }

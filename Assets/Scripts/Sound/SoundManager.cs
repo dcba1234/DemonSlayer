@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class SoundManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -25,6 +25,8 @@ public class SoundManager : MonoBehaviour
     }
     public static void PlaySound(string clip)
     {
+        //if(SettingUI.drafSetting.sound == true)
+        //{
         switch(clip){
             case "Attack":
                 audioSource.PlayOneShot(AttSound);
@@ -39,5 +41,6 @@ public class SoundManager : MonoBehaviour
                 audioSource.PlayOneShot(GetHit);
                 break;
         }
+        //}
     }
 }
