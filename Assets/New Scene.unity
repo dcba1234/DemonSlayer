@@ -151,6 +151,36 @@ Transform:
   m_Father: {fileID: 4588261408425070943}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &71968221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 71968222}
+  m_Layer: 9
+  m_Name: shotPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &71968222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71968221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12, y: -1.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2093252743}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &155011752
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +499,7 @@ GameObject:
   - component: {fileID: 464200913}
   - component: {fileID: 464200912}
   - component: {fileID: 464200917}
+  - component: {fileID: 464200920}
   m_Layer: 9
   m_Name: BatPurple
   m_TagString: enemy
@@ -506,8 +537,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 464200914}
   test: 0
-  runSpeed: 0.1
-  movingRange: 138
+  runSpeed: 0.01
+  movingRange: 100
   healthBar: {fileID: 0}
   MonsterHealth: 1000
   startDazedTime: 0.6
@@ -671,6 +702,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &464200920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464200911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b46dafec6c27874f804c5a120711fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &499410844
 GameObject:
   m_ObjectHideFlags: 0
@@ -2121,7 +2164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637724504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.5, y: -2.68, z: -10}
+  m_LocalPosition: {x: -11.62, y: -2.7, z: -10}
   m_LocalScale: {x: 0.0106666675, y: 0.0106666675, z: 0.0106666675}
   m_Children:
   - {fileID: 1401528054}
@@ -2891,10 +2934,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2093252735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34, y: -2.85, z: -0.000022647902}
+  m_LocalPosition: {x: 5.7, y: -2.87, z: -0.000022647902}
   m_LocalScale: {x: 0.2832393, y: 0.27261582, z: 1}
   m_Children:
   - {fileID: 1645164993}
+  - {fileID: 71968222}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2910,8 +2954,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee366f848dbe8f47b0109fab9c6528b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackThrow: {fileID: 0}
-  shotPoint: {fileID: 0}
+  SuccubusThrow: {fileID: 1305764535369581557, guid: b1dabbbbc1eae8640b73a9d3b1958c27,
+    type: 3}
+  shotPoint: {fileID: 71968222}
   startTimeBtw: 2
 --- !u!1 &2094420757
 GameObject:
@@ -4255,7 +4300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3369071152544739221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.5, y: -2.68, z: -10}
+  m_LocalPosition: {x: -11.62, y: -2.7, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3369071151737319814}
@@ -4527,7 +4572,7 @@ GameObject:
   - component: {fileID: 2027223012396175833}
   - component: {fileID: 2027223012396175832}
   - component: {fileID: 817952705}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -4658,7 +4703,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4588261408425070936}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.5, y: -2.68, z: 0}
+  m_LocalPosition: {x: -11.62, y: -2.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5505629959259165540}
