@@ -2910,7 +2910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee366f848dbe8f47b0109fab9c6528b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackThrow: {fileID: 0}
+  SuccubusThrow: {fileID: 0}
   shotPoint: {fileID: 0}
   startTimeBtw: 2
 --- !u!1 &2094420757

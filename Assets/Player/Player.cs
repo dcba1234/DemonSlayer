@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float runSpeed;
     private Animator anim;
     bool Jump = false;
+    public bool allowJumpAnimation = true;
     //public bool isAtk = false;
 
     //public bool skill1;
@@ -126,6 +127,7 @@ public class Player : MonoBehaviour
         else
         {
             saveAll();
+            if (allowJumpAnimation)
             anim.SetBool("isJumping", true);
         }
     }
