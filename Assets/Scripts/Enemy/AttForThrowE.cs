@@ -5,7 +5,7 @@ using System;
 public class AttForThrowE : MonoBehaviour
 {
     // Start is called before the first frame update
-    private GameObject gameObject;
+    private GameObject player;
     private Animator anim;
 
     private Enemy_move enemy_Move;
@@ -21,7 +21,7 @@ public class AttForThrowE : MonoBehaviour
     public float startTimeBtw;
     void Start()
     {
-       gameObject= GameObject.FindGameObjectWithTag("Player");     
+       player= GameObject.FindGameObjectWithTag("Player");     
        
        anim = GetComponent<Animator>();
        enemy_Move = GetComponent<Enemy_move>();
@@ -34,10 +34,12 @@ public class AttForThrowE : MonoBehaviour
     }
     void Attack()
     {
-        if(Math.Abs(gameObject.transform.position.x - transform.position.x) < 4f)
+        if(enemy_Move.blood > 0)
+        {
+        if(Math.Abs(player.transform.position.x - transform.position.x) < 4f)
         {
             
-            if(gameObject.transform.position.x<transform.position.x)
+            if(player.transform.position.x<transform.position.x)
             {
                 if(transform.localScale.x<0)
                 {}
@@ -73,6 +75,11 @@ public class AttForThrowE : MonoBehaviour
         {
             enemy_Move.enabled=true;
             
+        }
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }
