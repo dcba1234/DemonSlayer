@@ -61,6 +61,8 @@ public class Player : MonoBehaviour
     private float TSW = 0.7f;
     private float startTSW = -1f;
     
+    //Lay
+    private bool Lay = false;
     
     void Start()
     {
@@ -79,40 +81,57 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(timeBtwAttack>=0)
+        if(Heart.heart>0)
         {
-            timeBtwAttack -= Time.deltaTime;
-            //Debug.Log(timeBtwAttack);
-            if(timeBtwAttack<0)
+            if(timeBtwAttack>=0)
             {
-                A1=true;
-                A2=false;
+                timeBtwAttack -= Time.deltaTime;
+                //Debug.Log(timeBtwAttack);
+                if(timeBtwAttack<0)
+                {
+                    A1=true;
+                    A2=false;
+                }
+            }
+            if(timeBtwSkill1>=0)
+            {
+                timeBtwSkill1 -= Time.deltaTime;
+                
+            }
+        
+            if(timeBtwSkill2>=0)
+            {
+                timeBtwSkill2 -= Time.deltaTime;
+                
+            }
+            if(timeToFall>0)
+            {
+                timeToFall -= Time.deltaTime;
+            }
+            if(timetoUp>0)
+            {
+                timetoUp -= Time.deltaTime;
+                if(timetoUp<0)
+                {
+                    anim.SetBool("Lay",false);
+                    Lay= false;
+                }
+            }
+            pl.setPosition(transform);
+        }
+        else
+        {
+            anim.SetBool("isDie",true);
+            for(int i=0;i<100;i++)
+            {
+                if(i==99)
+                {
+                transform.position = new Vector3(-12.95f,-2.58f,0);
+                anim.SetBool("isDie",false);
+                Heart.heart = Heart.maxHeart;
+                }
             }
         }
-        if(timeBtwSkill1>=0)
-        {
-            timeBtwSkill1 -= Time.deltaTime;
-            
-        }
-      
-        if(timeBtwSkill2>=0)
-        {
-            timeBtwSkill2 -= Time.deltaTime;
-            
-        }
-        if(timeToFall>0)
-        {
-            timeToFall -= Time.deltaTime;
-        }
-        if(timetoUp>0)
-        {
-            timetoUp -= Time.deltaTime;
-            if(timetoUp<0)
-            {
-                anim.SetBool("Lay",false);
-            }
-        }
-        pl.setPosition(transform);
     }
 
     private void FixedUpdate()
@@ -141,6 +160,8 @@ public class Player : MonoBehaviour
 
     public void btn_leftOnClick()
     {
+        if(Lay==false)
+        {
         anim.SetBool("isWalking", true);
         if (this.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) return;
         horizontalMove = -runSpeed;
@@ -155,12 +176,13 @@ public class Player : MonoBehaviour
         startTSW = TSW;
         }
         startTSW = startTSW - Time.deltaTime;
-
+        }
     }
 
     public void btn_rightOnClick()
     {
-
+        if(Lay==false)
+        {
         if (this.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack")) return;
         horizontalMove = runSpeed;
         if (Jump != true)
@@ -174,6 +196,7 @@ public class Player : MonoBehaviour
         startTSW = TSW;
         }
         startTSW = startTSW - Time.deltaTime;
+        }
     }
 
     public void btn_Skill1()
@@ -291,6 +314,7 @@ public class Player : MonoBehaviour
         timeToFall = 2f;
         anim.SetTrigger("Hurt");
         Heart.heart = Heart.heart - damage;
+        Debug.Log(Heart.heart);
         //transform.position = new Vector3(transform.position.x-0.5f,transform.position.y,transform.position.z);
         stackAtt++;
         if(stackAtt==3)
@@ -300,6 +324,7 @@ public class Player : MonoBehaviour
             {
                 anim.SetTrigger("Fall");
                 anim.SetBool("Lay",true);
+                Lay=true;
                 timetoUp = 3f;
             }
         }
