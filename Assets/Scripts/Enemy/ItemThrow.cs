@@ -90,7 +90,7 @@ public class ItemThrow : MonoBehaviour
         }
     }
     void DestroyThrow()
-    {
+    {Debug.Log("Dé");
         Destroy(gameObject);
     }
 }
