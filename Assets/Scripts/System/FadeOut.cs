@@ -8,6 +8,7 @@ public class FadeOut : MonoBehaviour
     // Start is called before the first frame update
     private Animator ani;
     public string nextScene;
+    public bool deActiveAfterFadeIn = false;
     void Start()
     {
         ani = GetComponent<Animator>();
@@ -18,8 +19,16 @@ public class FadeOut : MonoBehaviour
     {
         
     }
+    public void deActive()
+    {
+        if (deActiveAfterFadeIn)
+        {
+            this.transform.gameObject.SetActive(false);
+        }
+    }
     public void toFadeOut()
     {
+        Debug.Log("whyyyy");
         ani.SetTrigger("FadeOut");
     }
     public void toScene()

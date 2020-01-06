@@ -328,7 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a36dff21f17bbb4abf5794ece2d7f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: TestScene
+  nextScene: StoryBegin2
+  deActiveAfterFadeIn: 0
 --- !u!1 &688506752
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,7 +748,6 @@ MonoBehaviour:
     for the dangers around us, that one day they will return. At that time our heroes
     will appear and fight to protect this beautiful land.
   - 'The story begins from there .... '
-  pos: 0
   Fade: {fileID: 465214231}
 --- !u!1 &1419978715
 GameObject:
