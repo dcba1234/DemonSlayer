@@ -98,7 +98,6 @@ public class Enemy_move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(checkFaceRight()); 
         if (blood > 0)
         {
 

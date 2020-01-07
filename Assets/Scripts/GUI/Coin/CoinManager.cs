@@ -9,8 +9,10 @@ public class CoinManager : MonoBehaviour
     private static int coin = 0;
     void Start()
     {
+
         coin = GameSystem.loadGame().Coin;
         GameObject.FindGameObjectWithTag("Coin").GetComponent<TextMeshProUGUI>().SetText(coin.ToString());
+        Debug.Log(coin);
     }
 
     // Update is called once per frame

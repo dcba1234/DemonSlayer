@@ -25,7 +25,8 @@ public class MainMenu : MonoBehaviour
            // loading.loadLevel("StoryBegin1");
         else
         {
-            SceneManager.LoadScene("TestScene");
+            loadingLv.SetActive(true);
+            loadingLv.GetComponent<LoadingBar>().loadLevel(loaddingSceneName);
         }
 
     }

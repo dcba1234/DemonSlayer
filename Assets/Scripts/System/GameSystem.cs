@@ -43,6 +43,7 @@ public class GameSystem
         PlayerEntity player = new PlayerEntity();
         // do smt
         string path = Application.persistentDataPath + playerSaveFileName;
+        Debug.Log(path);
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
