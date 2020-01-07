@@ -6,13 +6,15 @@ public class Heart : MonoBehaviour
 {
     // Start is called before the first frame update
     Image heartBar;
-    [Range(0, 100f)] [SerializeField] float maxHeart = 100f;
+    [Range(0, 100f)] [SerializeField] public float maxHeart = 100f;
     public static float heart;
     // Start is called before the first frame update
     void Start()
     {
+
         heartBar = GetComponent<Image>();
         heart = maxHeart;
+        Debug.Log(heart);
     }
 
     // Update is called once per frame

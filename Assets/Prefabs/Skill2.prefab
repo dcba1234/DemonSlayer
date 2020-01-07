@@ -139,7 +139,7 @@ MonoBehaviour:
   damage: 100
   whatisSolid:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!82 &117841638533195914
 AudioSource:
   m_ObjectHideFlags: 0

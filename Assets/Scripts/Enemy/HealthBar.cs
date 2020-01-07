@@ -39,7 +39,7 @@ public class HealthBar : MonoBehaviour
     {
         try
         {
-        transform.position = new Vector3(enemy_Move.locationX(x),enemy_Move.locationY(y),enemy_Move.locationZ(z));
+        transform.position = new Vector3(enemy_Move.locationX(x),enemy_Move.locationY(y) +0.2f,enemy_Move.locationZ(z));
         if(enemy_Move.blood<=0)
         {
             
