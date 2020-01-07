@@ -41,7 +41,6 @@ public class Knight : MonoBehaviour
             if (player.transform.position.x < -5.7)
             {
                 runLeft();
-                fadeOut.SetActive(true);
                 if (this.transform.position.x < -5.7)
                 {
                     // next scene

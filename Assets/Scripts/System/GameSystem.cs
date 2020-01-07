@@ -14,6 +14,7 @@ public class GameSystem
     public const string playerSaveFileName = "/player.now";
     public const string settingSaveFileName = "/setting.now";
     public const string isFisrtTimeSaveFileName = "/isFirstTime.now";
+    public const string coinFileName = "/coin.now";
     public static void test()
     {
         Debug.Log(soundVolume);
