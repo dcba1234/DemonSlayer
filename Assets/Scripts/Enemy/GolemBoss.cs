@@ -5,6 +5,7 @@ using System;
 public class GolemBoss : MonoBehaviour
 {
     private GameObject player;
+    private Enemy_move enemy_Move;
     private Animator anim;
     
     private bool Att=false;
@@ -21,18 +22,25 @@ public class GolemBoss : MonoBehaviour
     void Start()
     {
         player= GameObject.FindGameObjectWithTag("Player");     
-       
-       anim = GetComponent<Animator>();
+        enemy_Move = GetComponent<Enemy_move>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(enemy_Move.blood>0)
+        {
         DirecFace();
         if(timeBtwAttack>0)
         {
             timeBtwAttack = timeBtwAttack - Time.deltaTime;
             //transform.rotation =  Quaternion.Euler(0, 0, 0);
+        }
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
     void DirecFace()
