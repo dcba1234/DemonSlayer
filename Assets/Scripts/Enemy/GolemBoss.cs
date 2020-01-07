@@ -11,11 +11,12 @@ public class GolemBoss : MonoBehaviour
     
     //Attack
     private float timeBtwAttack = -1f;
-    private float startTimeBtwAttack = 2f;
+    private float startTimeBtwAttack = 3f;
     public Transform attackPos;
     public float attackRange;
     public LayerMask whatIsEnemies;
     public float damage;
+    public GameObject Rock;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,7 @@ public class GolemBoss : MonoBehaviour
         if(timeBtwAttack>0)
         {
             timeBtwAttack = timeBtwAttack - Time.deltaTime;
+            //transform.rotation =  Quaternion.Euler(0, 0, 0);
         }
     }
     void DirecFace()
@@ -41,67 +43,80 @@ public class GolemBoss : MonoBehaviour
             
             if(player.transform.position.x<transform.position.x)
             {
-                if(transform.localScale.x<0)
-                {   
-                    if(Math.Abs(player.transform.position.x - transform.position.x) < 2f )
-                    {
-                        Att=true;
-                        anim.SetBool("isWalking",false);
+                if((int)player.transform.position.y - (int)transform.position.y <= 0.5f)
+                {
+                    transform.rotation =  Quaternion.Euler(0, 0, 0);
+                    if(transform.localScale.x<0)
+                    {   
+                        if(Math.Abs(player.transform.position.x - transform.position.x) < 2f )
+                        {
+                            Att=true;
+                            anim.SetBool("isWalking",false);
+                        }
+                        else
+                        {
+                            Att=false;
+                        }
+                        if(Att==false)
+                        {        
+                            transform.position = new Vector3(transform.position.x - 0.05f,transform.position.y,transform.position.z);
+                            anim.SetBool("isWalking",true);
+                        }
+                        else
+                        {
+                            Attack1();
+                            
+                        }
                     }
                     else
                     {
-                        Att=false;
-                    }
-                    if(Att==false)
-                    {        
-                        transform.position = new Vector3(transform.position.x - 0.01f,transform.position.y,transform.position.z);
-                        anim.SetBool("isWalking",true);
-                    }
-                    else
-                    {
-                        Attack1();
+                        transform.localScale = new Vector3(transform.localScale.x * -1,transform.localScale.y,transform.localScale.z);
                         
                     }
                 }
                 else
                 {
-                    transform.localScale = new Vector3(transform.localScale.x * -1,transform.localScale.y,transform.localScale.z);
-                    
+                    Attack2();
                 }
-                
                 
 
             }
             else
             {
-                if(transform.localScale.x>0)
+                if((int)player.transform.position.y - (int)transform.position.y <= 0.5f)
                 {
-                    if(Math.Abs(player.transform.position.x - transform.position.x) < 2f )
+                    if(transform.localScale.x>0)
                     {
-                        Att=true;
-                        anim.SetBool("isWalking",false);
+                        if(Math.Abs(player.transform.position.x - transform.position.x) < 2f )
+                        {
+                            Att=true;
+                            anim.SetBool("isWalking",false);
+                        }
+                        else
+                        {
+                            Att=false;
+                        }
+                        if(Att==false)
+                        { 
+                            transform.position = new Vector3(transform.position.x + 0.05f,transform.position.y,transform.position.z);
+                            anim.SetBool("isWalking",true);
+                        }
+                        else
+                        {
+                            Attack1();
+                            
+                        }
                     }
                     else
                     {
-                        Att=false;
-                    }
-                    if(Att==false)
-                    { 
-                        transform.position = new Vector3(transform.position.x + 0.01f,transform.position.y,transform.position.z);
-                        anim.SetBool("isWalking",true);
-                    }
-                    else
-                    {
-                        Attack1();
+                        transform.localScale = new Vector3(transform.localScale.x * -1,transform.localScale.y,transform.localScale.z);
                         
                     }
                 }
                 else
                 {
-                    transform.localScale = new Vector3(transform.localScale.x * -1,transform.localScale.y,transform.localScale.z);
-                    
+                    Attack2();
                 }
-                
                 
             }
             
@@ -155,6 +170,20 @@ public class GolemBoss : MonoBehaviour
 
             }
             anim.SetTrigger("Attack");
+        }
+    }
+    void Attack2()
+    {
+        if(timeBtwAttack < 0)
+        {
+            anim.SetTrigger("slashinair");
+            transform.rotation = Quaternion.Euler(0, 0, 20);
+            timeBtwAttack = startTimeBtwAttack;
+            Instantiate(Rock, new Vector3(player.transform.position.x, 14f, 0), Quaternion.identity);
+        }
+        else
+        {
+            //transform.rotation =  Quaternion.Euler(0, 0, 0);
         }
     }
     void OnDrawGizmosSelected()
