@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     public GameObject gameObject;
 
     public Enemy_move enemy_Move;
+    
+    public Transform respawn;
     //Skill 1
     public GameObject Skill1;
 
@@ -127,7 +129,7 @@ public class Player : MonoBehaviour
             {
                 if(i==99)
                 {
-                transform.position = new Vector3(-12.95f,-2.58f,0);
+                transform.position = new Vector3(respawn.position.x,respawn.position.y,respawn.position.z);
                 anim.SetBool("isDie",false);
                 Heart.heart = Heart.maxHeart;
                 }
