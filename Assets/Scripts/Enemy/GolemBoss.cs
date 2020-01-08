@@ -40,6 +40,7 @@ public class GolemBoss : MonoBehaviour
         }
         else
         {
+
             Destroy(gameObject);
         }
     }

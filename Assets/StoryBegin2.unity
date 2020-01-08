@@ -8272,6 +8272,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rolateSpeed: 1
   nextSceneName: 
+  hasLoading: 0
+  loadingLv: {fileID: 0}
+  loadingScreen: {fileID: 0}
 --- !u!1 &1855682561
 GameObject:
   m_ObjectHideFlags: 0
@@ -9951,6 +9954,7 @@ MonoBehaviour:
   damage: 0
   gameObject: {fileID: 0}
   enemy_Move: {fileID: 0}
+  respawn: {fileID: 0}
   Skill1: {fileID: 0}
   shotPoint: {fileID: 0}
   startTimeBtwSkill1: 0

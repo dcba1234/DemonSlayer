@@ -2,6 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -129,6 +130,7 @@ public class Player : MonoBehaviour
             {
                 if(i==99)
                 {
+                    SceneManager.LoadScene("respawnMap");
                 transform.position = new Vector3(respawn.position.x,respawn.position.y,respawn.position.z);
                 anim.SetBool("isDie",false);
                 Heart.heart = Heart.maxHeart;
