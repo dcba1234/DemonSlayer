@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     
     //Lay
     private bool Lay = false;
-    
+    public bool isStory = false;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -125,11 +125,13 @@ public class Player : MonoBehaviour
         }
         else
         {
+            if (isStory) return;
             anim.SetBool("isDie",true);
             for(int i=0;i<100;i++)
             {
                 if(i==99)
                 {
+                    Debug.Log("dieeeee");
                     SceneManager.LoadScene("respawnMap");
                 transform.position = new Vector3(respawn.position.x,respawn.position.y,respawn.position.z);
                 anim.SetBool("isDie",false);

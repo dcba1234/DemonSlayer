@@ -9963,6 +9963,7 @@ MonoBehaviour:
   shotPoint2: {fileID: 0}
   startTimeBtwSkill2: 0
   ManaLostS2: 0
+  isStory: 1
 --- !u!114 &2027223011885586835
 MonoBehaviour:
   m_ObjectHideFlags: 0

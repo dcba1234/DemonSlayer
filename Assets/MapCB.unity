@@ -5525,7 +5525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &631874691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5544,8 +5544,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00061035156, y: -0.00012207031}
-  m_SizeDelta: {x: 291.66, y: 164.06}
+  m_AnchoredPosition: {x: -0.0004272461, y: -0.006713867}
+  m_SizeDelta: {x: 291.7, y: 164.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &631874693
 MonoBehaviour:
@@ -7617,6 +7617,7 @@ MonoBehaviour:
   shotPoint2: {fileID: 1506956639}
   startTimeBtwSkill2: 8
   ManaLostS2: 30
+  isStory: 0
 --- !u!114 &980357780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16785,7 +16786,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 1912600616}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 0
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
